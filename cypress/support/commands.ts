@@ -38,74 +38,42 @@
 
 /* eslint-disable @typescript-eslint/no-namespace */
 declare global {
-    namespace Cypress {
-        interface Chainable {
-            typeInputData(
-                field: string,
-                write: string,
-                pressEnter?: boolean,
-            ): Chainable<void>;
+  namespace Cypress {
+    interface Chainable {
+      typeInputData(
+        field: string,
+        write: string,
+        pressEnter?: boolean,
+      ): Chainable<void>;
+      registerUserData(
+        field: string,
+        write: string,
+        pressEnter?: boolean,
+      ): Chainable<void>;
 
-            clearAndTypeRightData(field: string, write: string): Chainable<void>;
-
-            hasErrorMessage(error: string): Chainable<void>;
-
-            typeUserData(object): Chainable<void>;
-
-            notExist(element: string): Chainable<void>;
-        }
+      notExist(element: string): Chainable<void>;
     }
+  }
 }
 
 Cypress.Commands.add("notExist", (element: string) => {
-    cy.findByRole(element).should("not.exist");
-});
-Cypress.Commands.add("hasErrorMessage", (error: string) => {
-    cy.get("span").should("contain.text", error);
+  cy.findByRole(element).should("not.exist");
 });
 Cypress.Commands.add(
-    "typeInputData",
-    (field: string, write: string, pressEnter: boolean = true) => {
-        cy.get(`input[name="${field}"]`).type(`${write}${pressEnter && "{enter}"}`);
-        cy.wait(200);
-    },
+  "typeInputData",
+  (field: string, write: string, pressEnter: boolean = false) => {
+    cy.get(`input[name="${field}"]`)
+      .first()
+      .type(`${write}${pressEnter ? "{enter}" : ""}`);
+  },
 );
 Cypress.Commands.add(
-    "clearAndTypeRightData",
-    (field: string, write: string) => {
-        cy.get(`input[name="${field}"]`).clear().type(`${write}{enter}`);
-        cy.wait(200);
-    },
+  "registerUserData",
+  (field: string, write: string, pressEnter: boolean = false) => {
+    cy.get(`input[name="${field}"]`)
+      .last()
+      .type(`${write}${pressEnter ? "{enter}" : ""}`);
+  },
 );
-
-Cypress.Commands.add(
-    "typeInputData",
-    (field: string, write: string, pressEnter: boolean = true) => {
-        cy.get(`input[name="${field}"]`).type(`${write}${pressEnter && "{enter}"}`);
-        cy.wait(200);
-    },
-);
-Cypress.Commands.add(
-    "typeInputData",
-    (field: string, write: string, pressEnter: boolean = true) => {
-        cy.get(`input[name="${field}"]`).type(`${write}${pressEnter && "{enter}"}`);
-        cy.wait(200);
-    },
-);
-
-Cypress.Commands.add("typeUserData", (user: User) => {
-    cy.typeInputData("firstName", user.firstName);
-    cy.typeInputData("lastName", user.lastName);
-    cy.typeInputData("email", user.email);
-    cy.typeInputData("password", user.password);
-    cy.typeInputData("confirmPassword", user.password);
-});
-
-interface User {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-}
 
 import "@testing-library/cypress/add-commands";

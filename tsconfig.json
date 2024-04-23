@@ -1,10 +1,18 @@
 {
+  "include": [
+    "**/*.ts",
+    "cypress/types/**/*.d.ts"
+  ],
   "compilerOptions": {
     "allowJs": true,
     "baseUrl": "../node_modules",
-    "types": ["cypress", "@testing-library/cypress", "../support"],
+    "types": [
+      "cypress",
+      "@testing-library/cypress",
+      "../support",
+      "@types/node"
+    ],
     "moduleResolution": "Node",
     "esModuleInterop": true
-  },
-  "include": ["**/*.*"]
+  }
 }
