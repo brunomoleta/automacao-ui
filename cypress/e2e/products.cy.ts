@@ -1,6 +1,4 @@
 describe("Feat: Products", () => {
-  const found: string = "shirt";
-  const notFound: string = "chuteira de basquete";
 
   beforeEach(() => {
     cy.fixture("errorMessages").then((messages) => {
