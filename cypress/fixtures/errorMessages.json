@@ -1,0 +1,10 @@
+{
+  "password": "Perdeu a senha?",
+  "email": "Endereço de e-mail desconhecido. Verifique novamente ou tente seu nome de usuário.",
+
+  "noProducts": "Nenhum produto foi encontrado para a sua seleção.",
+
+  "registerEmail": "Erro: Informe um endereço de e-mail válido.",
+  "duplicateEmail": "Erro: Uma conta já está registrada com seu endereço de e-mail. Faça login.",
+  "registerPassword": "Erro: Digite a senha da conta."
+}
